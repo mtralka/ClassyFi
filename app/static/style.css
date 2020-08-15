@@ -1,0 +1,253 @@
+
+
+* {
+
+	color: black;
+}
+
+.left {
+
+	
+	position: absolute;
+	width: 26rem;
+	height: 100%;
+	left: 0;
+	top: 0;
+	overflow-y: auto;
+	
+
+}
+
+.popup-question-div {
+
+	
+	position: absolute;
+	width: 13rem;
+	left: 15rem;
+	top: 0;
+	padding: 0;
+	height: 100%;
+
+}
+
+.popup-question-card {
+
+	display: none;
+	
+	position: absolute;
+	overflow: visible;
+	top: 30px;
+	left: 5px;
+	margin-left: 5px;
+	
+}
+
+.right {
+
+	
+	position: absolute;
+	width: 75%;
+	left: 29rem;
+	
+	top: 4rem;
+	height: 85%;
+	
+	
+}
+
+.web-frame {
+
+	position: relative;
+	margin: 0 auto;
+	margin: 0 0;
+	background-color: black;
+	height: 100%;
+	/*overflow: auto;*/
+	
+	
+	width: 80%;
+	
+
+}
+
+.form-frame {
+
+	margin: 2rem 2rem;
+	
+}
+
+.check-box {
+
+	font-size: 1.5rem;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+
+}
+
+.form-frame h2 {
+
+	
+	font-size: 1.5rem;
+	
+
+}
+
+.photo-control {
+
+	margin: 10px 20px;
+
+}
+
+.class-sub {
+	
+	text-align: center;
+	padding: auto auto;
+	margin-top: 40px;
+
+
+}
+
+
+/*
+	
+	Landing Page
+
+*/
+
+.landing-greeting {
+
+	
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	font-size: 3rem;
+	
+}
+
+.center {
+
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	text-align: center;
+
+}
+
+.tutti_sheet_body {
+
+	
+	
+	margin-bottom: auto;
+	max-width: 800px;
+
+
+}
+
+.sheet_outline {
+
+	
+	margin: 10px auto;
+
+	max-width: 22rem;
+	text-align: left;
+	
+
+}
+
+.sheet_title_heading {
+
+	margin-bottom: 25px; 
+}
+
+.individual_sheet {
+
+	text-align: left
+
+
+}
+
+
+.card-animate-mouse-use:hover {
+
+	background-color: green;
+}
+
+.card-animate-mouse-delete:hover {
+
+	background-color: red;
+}
+
+.sub_sheet {
+
+	margin-bottom: 1px;
+	margin-top: 5px;
+	font-color: black;
+	color: black;
+	
+	
+
+}
+
+
+
+/*
+	
+	New Sheet
+
+*/
+
+
+.no_margin_tb {
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+
+}
+
+
+
+
+.home {
+
+	color: black;
+	
+
+
+}
+
+
+.home-tags {
+
+	margin-top: 50px;
+	align-items: center;
+	justify-content: center !important;
+	
+
+}
+
+
+
+
+.home-about {
+
+	margin-top: 250px;
+	
+
+
+}
+
+
+.home-title {
+
+	max-width: 900px;
+	margin-top: 100px;
+
+}
+
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}

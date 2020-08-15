@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+	
+	<div class="container home-title is-spaced">
+
+		<h1 class="title is-size-1 has-text-centered">
+
+			<strong style="color: black">ClassyFi</strong>, the open source
+			photo classification tool
+
+		</h1>
+
+		<h2 class="subtitle is-size-3 has-text-centered">
+
+		 	<em>the classy classifier</em>
+
+		</h2>
+
+	</div>
+
+	<div class="field is-grouped is-grouped-multiline home-tags">
+
+		<div class="control ">
+
+			<div class="tags has-addons ">
+
+				<span class="tag is-dark">
+
+					release
+				</span>
+
+				<span class="tag is-danger">
+
+					pre
+
+				</span>
+			</div>
+		</div>
+
+		<div class="control ">
+
+			<div class="tags has-addons ">
+
+				<span class="tag is-dark">
+
+					powered by
+				</span>
+
+				<span class="tag is-info">
+
+					python
+
+				</span>
+
+			</div>
+		</div>
+
+		<div class="control ">
+
+			<div class="tags has-addons ">
+
+				<span class="tag is-dark">
+
+					by
+
+				</span>
+
+				<span class="tag is-info">
+
+					<a href="https://tralka.xyz">Matthew Tralka</a>
+
+				</span>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="tile is ancestor home-about">
+
+		<div class="tile is-parent is-vertical is-8">
+
+			<div class="tile is-child box">
+
+
+				<p class="title has-text-info">
+
+					What is ClassyFi?
+
+				</p>
+				<p>
+
+					ClassyFi is an in-browser photo classification program featuring real-time integration with Google Sheets for dynamic multi-user categorization and data-management. With an easy-to-use interface and open source customizability, ClassyFi is the optimal tool for manually classifying large photo datasets. Click <a data-target='#modal' style="color: #3273dc" class="modal-button">here</a> for an example of the classification interface.
+
+					<br/>
+					<br/>
+					
+				</p>
+
+				<div class="message">
+
+					<div class="message-body">
+
+						Want more info? Sign up now to get started or check <a href="{{ url_for('main.about') }}" style='color: #3273dc'>here</a> to contact me and read the ClassyFi FAQ
+
+					</div>
+
+				</div> 
+
+			</div>
+
+			<div class="tile is-child box">
+
+
+				<p class="title has-text-dark">
+
+					What can I use this for?
+
+				</p>
+				<p>
+
+					Licensed through GPL-3 open sourced code, ClassyFi is customizable to fit your research needs. However, ClassyFi was built for maximum compatibility with <a href="https://github.com/mtralka/FLICKR-GeoSearch" style="color: #3273dc">FLICKR GeoSearch</a>, a comprehensive app that executes geospatial photo searches across the entire Flickr photo community. FLICKR GeoSearch opens the door for anyone to access and analyze social media big data. However, any dataset capable of being stored on a Google Sheet document is compatible! Feel free to fork the <a href="https://github.com/mtralka/ClassyFi" style='color: #3273dc'>master branch</a>  to build your own Custom ClassyFi or reach out to me <a href="{{ url_for('main.about') }}" style='color: #3273dc'>here</a> to see how I can help.
+					<br/><br/>
+					<strong>ClassyFi is currently being used in active research projects in the fields of botany and geography.</strong>
+
+				</p>
+
+			</div>
+
+		</div>
+
+		<div class="tile is-parent">
+
+			<div class="tile is-child box ">
+				<div class="content">
+
+					<p class="title has-text-success">
+
+						Getting Started
+
+					</p>
+					<p class="subtitle has-text-black">
+
+						Working with ClassyFi is easy!
+						
+					</p>
+
+					<br/>
+
+					<p class="title is-4 has-text-black">
+
+						Classic ClassyFi
+				
+					</p>
+
+					<p class="subtitle is-6 has-text-black">
+
+						<em>built-in methodologies</em>
+
+					</p>
+
+					<ol>
+						<li>
+							
+							Create an account <a href="{{url_for('auth.signup') }}" style='color: #3273dc'>here</a>
+
+						</li>
+						<li>
+							
+							Follow instructions in the <a href="{{url_for('main.landing')}}" style='color: #3273dc'>Dashboard</a>
+							to share your document with ClassyFi.
+
+						</li>
+						<li>
+							
+							Add your sheet through the Dashboard
+
+						</li>
+						<li>
+							
+							Get ClassyFi-ing!
+
+						</li>
+					</ol>
+					
+					
+					<p class="title is-4 has-text-black">
+
+						Custom ClassyFi
+
+					</p>
+
+					<p class="subtitle is-6 has-text-black">
+
+						<em>custom methodologies</em>
+
+					</p>
+					<ol>
+						<li>
+
+							Leverage the power of open source! Fork the <a href="https://github.com/mtralka/ClassyFi" style='color: #3273dc'>master branch</a>
+
+						</li>
+						<li>
+
+							Create your own Custom ClassyFi using Python (Flask, Jinja) and some simple pre-templated HTML / CSS + JavaScript.
+							
+							Feel free to  <a href="{{ url_for('main.about') }}" style='color: #3273dc'>reach out to me</a>
+							to see how I can help
+
+						</li>
+						<li>
+
+							Get ClassyFi-ing!
+
+						</li>
+						
+					</ol>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal" id="modal">
+
+			<div class="modal-background"></div>
+
+			<div class="modal-content">
+
+				<p class="image">
+
+					<img src="{{ url_for ('static', filename='classyfi_example_1.PNG')}}" alt="ClassyFi classification example">
+				</p>
+
+				<br/>
+
+				<p class="image">
+
+					<img src="{{ url_for ('static', filename='classyfi_example_2.PNG')}}" alt="ClassyFi classification example">
+				</p>
+
+			</div>
+
+			<button class="modal-close is-large" aria-label="close"></button>
+
+</div>
+
+<script>
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+         
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+
+         $(".modal-background").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+
+</script>
+
+
+
+{% endblock %}

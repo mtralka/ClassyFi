@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Classy: Photo Classification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for ('static', filename= 'style.css') }}" />
+    <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
+    
+    
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+
+        <div class="hero-head">
+
+            <nav class="navbar is-spaced" style="height: 100%">
+
+                <div class="navbar-brand">
+
+                    <a class="navbar-item" href="/">
+
+                        <img src="{{ url_for ('static', filename='brand3.b.png')}}" alt="Classy: Open Source Photo Classification"
+                         width="70">
+                        
+                    </a>
+
+                    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+
+                    </a>
+
+                </div>
+
+                <div id="navMenu" class="navbar-menu">
+
+                    <div class="navbar-end">
+
+                        <a href="{{ url_for('main.index') }}" class="navbar-item">
+                            Home
+                        </a>
+
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('main.landing') }}" class="navbar-item">
+                            Dashboard
+                        </a>
+                        {% endif %}
+
+                        {% if not current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                            Login
+                        </a>
+                        
+                        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                            Sign Up
+                        </a>
+                        {% endif %}
+
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                            Logout
+                        </a>
+
+                        {% endif %}
+                        <a href="{{ url_for('main.about') }}" class="navbar-item">
+                            About
+                        </a>
+
+                    </div>
+
+                </div>
+                    
+            </nav>
+
+        </div>
+
+        <div class='level'>
+
+            <div class='level-item'>
+
+                <p class='title'>
+
+                        {{ pic_title }}
+                    
+                </p>
+                
+            </div>
+
+        </div>
+
+        <form method="POST">        
+        
+        <div class="hero-body">
+
+            <div class="tile is-ancestor">
+
+                <!-- Horizontal 1 -->
+                <div class="tile is-2">
+
+                    <div class="tile is-parent">
+
+                        <div class="panel tile is-child">
+
+                            <p class="panel-heading">
+
+                                Subject
+
+                            </p>
+
+                            
+                            <label class="panel-block">
+
+                                    {{ form.agriculture }} <br/>
+                                    {{ form.agriculture.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.building }} <br/>
+                                    {{ form.building.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.cultural (onclick = "toggle_sub('cultural_sub1', this.id)" )}} <br/>
+                                    {{ form.cultural.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.infastructure }} <br/>
+                                    {{ form.infastructure.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.livestock }} <br/>
+                                    {{ form.livestock.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.landscape (onclick = "toggle_sub('landscape_sub1', this.id)") }} <br/>
+                                    {{ form.landscape.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.people (onclick = "toggle_sub('people_sub1', this.id)") }} <br/>
+                                    {{ form.people.label}}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.pet }} <br/>
+                                    {{ form.pet.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.plant (onclick = "toggle_sub('plant_sub1', this.id)") }} <br/>
+                                    {{ form.plant.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.recreational }} <br/>
+                                    {{ form.recreational.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.water (onclick = "toggle_sub('water_sub1', this.id)") }} <br/>
+                                    {{ form.water.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.weather (onclick = "toggle_sub('weather_sub1', this.id)") }} <br/>
+                                    {{ form.weather.label }}
+                                    
+                            </label>
+
+                            <label class="panel-block">
+
+                                    {{ form.wildlife }} <br/>
+                                    {{ form.wildlife.label }}
+                                    
+                            </label>
+
+                                
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Sub Question Prompt-->
+
+                    <!-- Cultural Sub -->
+                    <div class="title is-2" id="cultural_sub1" style="display: none">
+
+                        <div class="tile is-parent is-vertical">
+
+                            <div class="tile is-child ">
+
+                                <div class="panel">
+
+                                    <p class="panel-heading">
+
+                                        What type of cultural aspect?
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        {{ form.cultural_sub1 (class="input is-info is-small")}}
+                                        
+                                    </label>
+
+                                    <label class="panel-block">
+
+                                        <button type="button" class="button is-success is-small" onclick="done_sub('cultural_sub1')">
+
+                                            Done 
+
+                                        </button>
+
+                                    </label>
+                                    
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Landscape Sub 1 -->
+                    <div class="title is-2" id="landscape_sub1" style="display: none">
+
+                        <div class="tile is-parent is-vertical">
+
+                            <div class="tile is-child ">
+
+                                <div class="panel">
+
+                                    <p class="panel-heading">
+
+                                        Which landscape is visible?
+
+                                    </p>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.landscape_sub_alpine }} <br/>
+                                        {{ form.landscape_sub_alpine.label }}
+                                    
+                                    </label>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.landscape_alpine_meadow }} <br/>
+                                        {{ form.landscape_alpine_meadow.label }}
+                                    
+                                    </label>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.landscape_alpine_scrub }} <br/>
+                                        {{ form.landscape_alpine_scrub.label }}
+                                    
+                                    </label>
+                                    
+                                    <label class="panel-block">
+
+                                        {{ form.landscape_other_bool }}
+                                        {{ form.landscape_other (class="input is-info is-small", placeholder="Other")}}
+                                        
+                                    
+                                    </label>
+  
+                                </div>
+
+                                <div class="panel" id="landscape_sub2">
+
+                                    <p class="panel-heading">
+
+                                       Does the user correctly ID?
+
+                                    </p>
+
+                                    
+                                    {% for subfield in form.landscape_sub2 %}
+
+                                    <label class="panel-block">
+
+                                        <div class="control">
+
+                                            {{ subfield (class="radio")}}
+
+                                            {{ subfield.label (class="radio") }} <br/>
+
+                                            {% if subfield.id == 'landscape_sub2-3' %}
+
+                                                <br/>{{ form.landscape_sub2_free (class="input is-info is-small")}}
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </label>
+
+                                    {% endfor %}
+
+                                </div>
+
+                                <div class="panel">
+
+                                    <label class="panel-block">
+
+                                        <button type="button" class="button is-success is-small" onclick="done_sub('landscape_sub1')">
+
+                                            Done 
+
+                                        </button>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Plant Sub -->
+                    <div class="title is-2" id="plant_sub1" style="display: none; overflow-y: auto; max-height: 35rem; ">
+
+                        <div class="tile is-parent is-vertical">
+
+                            <div class="tile is-child ">
+
+                                <!-- PLANT SUB 1 TECH -->
+                                <div class="panel">
+
+                                    <p class="panel-heading">
+
+                                        Does User ID Plant?
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        <div class="buttons has-addons">
+
+                                            <button type='button' class="button is-danger is-small " onclick="addField('plant_sub1_answer', 'No'), toggle_display_p('plant_sub4')">
+
+                                                No
+
+                                            </button>
+
+                                            <button type='button' class="button is-warning is-small is-selected" onclick="addField('plant_sub1_answer', 'IDK'), toggle_display_p('plant_sub2')">
+
+                                                IDK
+
+                                            </button>
+
+                                            <button type='button' class="button is-success is-small" onclick="addField('plant_sub1_answer', 'Yes'), toggle_display_p('plant_sub2')">
+
+                                                Yes
+
+                                            </button>
+
+                                        </div>
+                                        
+                                    </label>
+
+                                    {{ form.plant_sub1_answer (id='plant_sub1_answer')}}
+
+                                </div>
+
+                                <!-- PLANT SUB 2 -->
+                                <div class="panel" id="plant_sub2" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Is user's ID correct?
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        <div class="buttons has-addons">
+
+                                            <button type='button' class="button is-danger is-small " onclick="addField('plant_sub2_answer', 'No'), , toggle_display_p('plant_sub4')">
+
+                                                No
+
+                                            </button>
+
+                                            <button type='button' class="button is-warning is-small is-selected" onclick="addField('plant_sub2_answer', 'IDK'), toggle_display_p('plant_sub3')">
+
+                                                IDK
+
+                                            </button>
+
+                                            <button type='button' class="button is-success is-small" onclick="addField('plant_sub2_answer', 'Yes'),toggle_display_p('plant_sub3')">
+
+                                                Yes
+
+                                            </button>
+
+                                        </div>
+                                        
+                                    </label>
+
+                                    {{ form.plant_sub2_answer (id='plant_sub2_answer')}}
+
+                                </div>
+
+                                <!-- PLANT SUB 3 -->
+                                <div class="panel" id="plant_sub3" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        User identified species / genus
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        {{ form.plant_sub3_answer (class="text is-medium")}}
+                                        
+                                    </label>
+
+                                    <button type="button" class="button is-link is-small" onclick="toggle_display_p('plant_sub4')">
+
+                                        Done 
+
+                                    </button>
+
+                                </div>
+
+                                <!-- PLANT SUB 4 -->
+                                <div class="panel" id="plant_sub4" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Are individual plants / flowers visible?
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        <div class="buttons has-addons">
+
+                                                <button type='button' class="button is-danger is-small " onclick="addField('plant_sub4_answer', 'No'), toggle_display_p('plant_sub8')">
+
+                                                    No
+
+                                                </button>
+
+                                                <button type='button' class="button is-warning is-small is-selected" onclick="addField('plant_sub4_answer', 'IDK'), toggle_display_p('plant_sub5')">
+
+                                                    IDK
+
+                                                </button>
+
+                                                <button type='button' class="button is-success is-small" onclick="addField('plant_sub4_answer', 'Yes'), toggle_display_p('plant_sub5')">
+
+                                                    Yes
+
+                                                </button>
+
+                                            </div>
+
+                                        {{ form.plant_sub4_answer (id='plant_sub4_answer')}}
+
+                                    </label>
+
+                                </div>
+
+                                <!-- PLANT SUB 5 -->
+                                <div class="panel" id="plant_sub5" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Plant Species / Genus
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        {{ form.plant_sub5_answer (class="text is-medium")}}
+                                        
+                                    </label>
+
+                                    <button type="button" class="button is-link is-small" onclick="toggle_display_p('plant_sub6')">
+
+                                        Done 
+
+                                    </button>
+
+                                </div>
+
+                                <!-- PLANT SUB 6 -->
+                                <div class="panel" id="plant_sub6" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Is plant black, red, or red list species?
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        <div class="buttons has-addons">
+
+                                            <button type='button' class="button is-black is-small " onclick="addField('plant_sub6_answer', 'Black'), toggle_display_p('plant_sub7')">
+
+                                                Black
+
+                                            </button>
+
+                                            <button type='button' class="button is-warning is-small is-selected" onclick="addField('plant_sub6_answer', 'Watch'), toggle_display_p('plant_sub7')">
+
+                                                Watch
+
+                                            </button>
+
+                                            <button type='button' class="button is-success is-small" onclick="addField('plant_sub6_answer', 'Red'),toggle_display_p('plant_sub7')">
+
+                                                Red
+
+                                            </button>
+
+                                            <button type="button" class="button is-black is-small" disabled></button> 
+
+                                            <button type='button' class="button is-danger is-small " onclick="addField('plant_sub6_answer', 'No'), toggle_display_p('plant_sub7')">
+
+                                                No
+
+                                            </button>
+
+                                            <button type='button' class="button is-warning is-small is-selected" onclick="addField('plant_sub6_answer', 'IDK'), toggle_display_p('plant_sub7')">
+
+                                                IDK
+
+                                            </button>
+
+                                        </div>
+
+                                    </label>
+
+                                        {{ form.plant_sub6_answer (id='plant_sub6_answer')}}
+
+                                </div>
+
+                                <!-- PLANT SUB 7 -->
+                                <div class="panel" id="plant_sub7" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Were users aware?
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        <div class="buttons has-addons">
+
+                                                <button type='button' class="button is-danger is-small " onclick="addField('plant_sub7_answer', 'No'), toggle_display_p('plant_sub8')">
+
+                                                    No
+
+                                                </button>
+
+                                                <button type='button' class="button is-warning is-small is-selected" onclick="addField('plant_sub7_answer', 'IDK'), toggle_display_p('plant_sub8')">
+
+                                                    IDK
+
+                                                </button>
+
+                                                <button type='button' class="button is-success is-small" onclick="addField('plant_sub7_answer', 'Yes'), toggle_display_p('plant_sub8')">
+
+                                                    Yes
+
+                                                </button>
+
+                                            </div>
+
+                                        {{ form.plant_sub7_answer (id='plant_sub7_answer')}}
+
+                                    </label>
+
+                                </div>
+
+                                <!-- PLANT SUB 8 -->
+                                <div class="panel" id="plant_sub8" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Plant Tags
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        {{ form.plant_sub8_answer (class="text is-medium")}}
+                                        
+                                    </label>
+
+                                </div>
+
+                                <!-- PLANT SUB 9 -->
+                                <div class="panel" id="plant_sub8" style="display: none">
+
+                                    <p class="panel-heading">
+
+                                        Plant Tags
+
+                                    </p>
+
+                                    <label class="panel-block">
+
+                                        {{ form.plant_sub8_answer (class="text is-medium")}}
+                                        
+                                    </label>
+
+                                </div>
+
+                                <div class='panel'>
+
+                                    <label class="panel-block">
+
+                                            <button type="button" class="button is-success is-small" onclick="done_sub('plant_sub1')">
+
+                                                Done 
+
+                                            </button>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- People Sub -->
+                    <div class="title is-2" id="people_sub1" style="display: none">
+
+                        <div class="tile is-parent is-vertical">
+
+                            <div class="tile is-child ">
+
+                                <div class="panel">
+
+                                    <p class="panel-heading">
+
+                                        Is the Photo a selfie?
+
+                                    </p>
+
+
+                                    {% for subfield in form.people_sub1 %}
+
+                                    <label class="panel-block">
+
+                                        {{ subfield (class="radio")}}
+                                        {{ subfield.label (class="radio") }} <br/>
+
+                                    </label>
+                                    
+                                    {% endfor %}
+
+                                </div>
+
+                                <div class='panel'>
+
+                                    <label class="panel-block">
+
+                                            <button type="button" class="button is-success is-small" onclick="done_sub('people_sub1')">
+
+                                            Done 
+
+                                            </button>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Water Sub 1 -->
+                    <div class="title is-2" id="water_sub1" style="display: none">
+
+                        <div class="tile is-parent is-vertical">
+
+                            <div class="tile is-child ">
+
+                                <div class="panel">
+
+                                    <p class="panel-heading">
+
+                                        What type of water?
+
+                                    </p>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.water_stream }} <br/>
+                                        {{ form.water_stream.label }}
+                                    
+                                    </label>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.water_lake }} <br/>
+                                        {{ form.water_lake.label }}
+                                    
+                                    </label>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.water_waterfall }} <br/>
+                                        {{ form.water_waterfall.label }}
+                                    
+                                    </label>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.water_coastal }} <br/>
+                                        {{ form.water_coastal.label }}
+                                    
+                                    </label>
+
+                                    <label class="panel-block">
+
+                                        {{ form.water_other_bool }}
+                                        {{ form.water_other (class="input is-info is-small", placeholder="Other")}}
+
+                                    </label>
+
+                                </div>
+
+                                <div class='panel'>
+
+                                    <label class="panel-block">
+
+                                        <button type="button" class="button is-success is-small" onclick="done_sub('water_sub1')">
+
+                                            Done 
+
+                                        </button>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Weather Sub 1 -->
+                    <div class="title is-2" id="weather_sub1" style="display: none">
+
+                        <div class="tile is-parent is-vertical">
+
+                            <div class="tile is-child ">
+
+                                <div class="panel">
+
+                                    <p class="panel-heading">
+
+                                        What type of weather?
+
+                                    </p>
+
+                                    <label class="panel-block">
+                                        
+                                        {{ form.weather_sub1 (class="input is-info is-small")}}
+                                        
+                                    
+                                    </label>
+
+                                      
+                                </div>
+
+                                <div class='panel'>
+
+                                    <label class="panel-block">
+
+                                        <button type="button" class="button is-success is-small" onclick="done_sub('weather_sub1')">
+
+                                        Done 
+
+                                        </button>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <!-- Horizontal 2 -->
+                <div class="tile is-2" id="horizontal_2">
+
+                    <div class="tile is-parent is-vertical">
+
+                        <div class="tile is-child ">
+
+                            <!-- Horizontal 2, vertical 1 -->
+                            <!-- LANGUAGE -->
+                            <div class="panel">
+
+                                <p class="panel-heading">
+
+                                    Language
+
+                                </p>
+
+                                <label class="panel-block">
+
+                                    {{ form.english }} <br/>
+                                    {{ form.english.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.italian }} <br/>
+                                    {{ form.italian.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.german }} <br/>
+                                    {{ form.german.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.french }} <br/>
+                                    {{ form.french.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.icelandic }} <br/>
+                                    {{ form.icelandic.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.no_lang }} <br/>
+                                    {{ form.no_lang.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.idk_lang }} <br/>
+                                    {{ form.idk_lang.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.other_lang_bool }}
+                                    {{ form.other_lang (class="input is-info is-small", placeholder="Other")}}
+                                    
+                                </label>                                
+
+                            </div>
+
+                        </div>
+
+                        <!-- Horizontal 2, vertical 2 -->
+                        <!-- COMMENTS -->
+                        <div class="tile is-child">
+
+                            <div class="panel">
+
+                                <p class="panel-heading">
+
+                                    {{ form.comment.label }}
+
+                                </p>
+
+
+                                <label class="panel-block">
+
+                                    {{ form.comment (class="textarea is-info",style="width:100%",rows="2") }} <br/>
+                                    
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Horizontal 3 -->
+                <!-- FLICKR FRAME -->
+                <div class="tile">
+
+                    <div class="tile is-parent is-vertical">
+
+                        <!-- Horizontal 3, FLICKR BOX, middle-->
+                        <div class="tile is-child ">
+
+                            <iframe is="x-frame-bypass" src= "{{ link }} " width="100%" height="600px"></iframe>
+
+                        </div>
+
+                        <!-- Horizontal 3, bottom -->
+                        <div class="tile is-child ">
+
+                            <div class = "level">
+
+                                <div class = 'level-left'>
+
+                                    {{ form.Previous (class= "button is-danger is-medium") }}
+
+                                </div>
+
+                                <!-- THIS NEEDS HELP -->
+                                <div class="level-item">
+
+                                    <a data-target="#modal" class="modal-button">
+
+                                        <button type='button' class="button is-link is-medium modal-button">
+
+                                            Current Row: {{ row }} (click to change) 
+
+                                        </button>
+
+                                    </a>
+
+                                    <!--
+                                    <a data-target="#modal" class="modal-button">
+                                        <button class="is-medium is-link button " >
+                                    
+                                            Current Row: {{ row + 1 }} (click to change) 
+                                    
+                                        </button>
+
+                                    </a>
+                                -->
+
+                                </div>
+                                
+                                <div class = 'level-right'>
+
+                                     {{ form.Next (class= "button is-success is-medium") }}
+                                    
+                                </div>
+
+                            </div>
+                           
+                        </div>
+
+                    </div>
+
+                </div>
+       
+            </div>
+
+        </div>
+
+        <div class="modal" id="modal">
+
+            <div class="modal-background"></div>
+
+            <div class="modal-content">
+
+                <div class="field">
+
+                    <div class="control">
+
+                        {{ form.go_to_row.label (class='subtitle')}}
+
+                        {{ form.go_to_row (class='input is-info is-medium') }}
+
+                    </div>
+
+                </div>
+
+                <button class='button is-medium is-link'>
+
+                    Go
+
+                </button>
+      
+            </div>
+
+            <button type='button' class="modal-close is-large" aria-label="close"></button>\
+
+        </div>
+
+    </form>
+    
+        
+
+    </section>
+
+    
+</body>
+
+<script>
+
+    function toggle_sub(id, id2) {
+
+        var e = document.getElementById(id);
+        var b = document.getElementById(id2);
+        var j = document.getElementById('horizontal_2');
+        
+        
+        /*
+        if (e.style.display != 'none')
+            e.style.display = 'none';
+
+        else
+            e.style.display = 'flex';*/
+
+        if (b.checked == true) {
+
+            e.style.display = 'flex';
+            j.style.display = 'none';
+
+        }
+            
+        else {
+
+            e.style.display = 'none';
+            j.style.display = 'flex';
+
+        }
+            
+    }
+
+</script>
+
+<script type="text/javascript">
+    <!--
+        function toggle_display(id) {
+
+            /*var e = document.getElementById(id);*/
+            var b = document.getElementById(id);
+            
+
+            if (b.style.display == 'none')
+                
+                b.style.display = 'flex';
+
+            else
+                b.style.display = 'none';
+
+
+        }
+
+        function toggle_display_p(id) {
+
+            /*var e = document.getElementById(id);*/
+            var b = document.getElementById(id);
+            
+
+            if (b.style.display == 'none')
+                
+                b.style.display = 'block';
+
+            else
+                b.style.display = 'none';
+
+
+        }
+
+        function done_sub(id) {
+
+        var e = document.getElementById(id);
+        var b = document.getElementById('horizontal_2');
+        e.style.display = 'none';
+        b.style.display = 'flex';
+        
+
+        }
+    //-->
+</script>
+
+<script>
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+         
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+
+         $(".modal-background").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+</script>
+
+<script>
+    function submitForm() {
+        var subjectfrm = document.getElementByName('subject')[0];
+        var nextfrm = document.getElementByName('next')[0];
+        subjectfrm.submit();
+        subjectfrm.reset();
+        nextfrm.submit();
+
+
+        return true;
+    }
+
+    
+
+</script>
+
+<script>
+
+    function addField(field, string) {
+        var addField = document.getElementById(field);
+        addField.value += string;
+
+
+    }
+
+</script>
+
+</html>

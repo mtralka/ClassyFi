@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+{% block content %}
+
+        <div class="hero-body">
+
+        	<div class = "landing-greeting">
+
+				<h1 class = 'title is-size-2'>
+
+					Welcome, {{ name }}
+
+				</h1>
+
+			</div>
+
+			
+
+			<div class = "center tutti_sheet_body ">
+				
+
+					
+
+				<div class="notification is-warning">
+						<button class="delete"></button>
+
+						<div class="content">
+
+						 Wait! Before you add a sheet to ClassyFi you need to share it with <strong>editing</strong> privileges through Google Sheets to: 
+								<br/>
+								<blockquote>
+									
+									classyfi@classyfi.iam.gserviceaccount.com
+
+								</blockquote>
+
+					</div>
+
+				</div>
+
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+				<div class="notification is-danger">
+
+					<button class="delete"></button>
+
+					<div class="content">
+
+						{{ message }}
+
+					</div>
+				
+				</div>
+				{% endif %}
+				{% endwith %}
+
+				{% for message in form.sheet_name.errors %}
+				<div class="notification is-danger">
+
+					<button class="delete"></button>
+
+					<div class="content">
+
+						{{ message }}
+
+					</div>
+				
+				</div>
+				{% endfor %}
+
+				{% for message in form.link_col.errors %}
+				<div class="notification is-danger">
+
+					<button class="delete"></button>
+
+					<div class="content">
+
+						{{ message }}
+
+					</div>
+				
+				</div>
+				{% endfor %}
+
+				{% for message in form.title_col.errors %}
+				<div class="notification is-danger">
+
+					<button class="delete"></button>
+
+					<div class="content">
+
+						{{ message }}
+
+					</div>
+				
+				</div>
+				{% endfor %}
+
+				{% if alright %}
+				<div class="notification is-good">
+
+					<button class="delete"></button>
+
+					<div class="content">
+
+						{{ alright_message }}
+
+					</div>
+				
+				</div>
+				{% endif %}
+
+				<div class = "center sheet_title_heading">
+
+
+
+					<h2 class = "title is-2 center">
+
+						Your classification sheets:
+
+					</h2>
+
+				</div>
+
+				{% for sheet in sheets  %}
+				
+					<div class = "card sheet_outline">
+					
+    					<div class = "card-content individual_sheet">
+
+    						<p class="title has-text-black individual_sheet"> 
+
+    							{{ sheet.sheet_name }}
+
+    						</p>
+
+    						<p class = "subtitle is-6 has-text-black sub_sheet">
+
+    							Link Column: {{ sheet.sheet_link_col }}
+
+    						</p>
+
+    						<p class = "subtitle is-6 has-text-black sub_sheet">
+
+    							Title Column: {{ sheet.sheet_title_col }}
+    							
+
+    						</p>
+
+    						<p class = "subtitle is-6 has-text-black sub_sheet">
+
+    							Starting Row: {{ sheet.starting_row }}
+    							
+
+    						</p>
+
+    					</div>
+
+    					<div class="card-footer">
+    						<a href="/deletesheet/{{ sheet.id }}" class= "card-footer-item card-animate-mouse-delete">
+    							
+    							Delete Me
+    							
+    						</a>
+    						
+    						<a href="/classify/{{ sheet.id }} " class="card-footer-item card-animate-mouse-use modal-button use-me">
+
+    							Use Me
+
+    						</a>
+    						
+
+    					</div>
+					</div>
+
+				{% endfor %}
+				<a data-target="#modal" class="modal-button">
+					<button class="button is-info  is-medium modal-button">
+
+						Add New Sheet
+
+					</button>
+				</a>
+
+				<!--
+				<div class = "center sheet_title_heading">
+
+					<h2 class = "title is-2 center">
+
+						Your classification templates:
+
+					</h2>
+
+				</div>
+
+				<div class = "card sheet_outline">
+					
+    					<div class = "card-content individual_sheet">
+
+    						<p class="title has-text-black individual_sheet"> 
+
+    							Classification Template Here
+
+    						</p>
+
+    						
+
+    						<p class = "subtitle is-6 has-text-black sub_sheet">
+
+    							Something goes here
+    							
+
+    						</p>
+
+    					</div>
+
+    					<div class="card-footer">
+    						<a href="/" class= "card-footer-item card-animate-mouse-delete">
+    							
+    							Delete Me
+    							
+    						</a>
+    						
+    						<a href="/template " class="card-footer-item card-animate-mouse-use modal-button use-me">
+
+    							Edit Me
+
+    						</a>
+    						
+
+    					</div>
+					</div>
+
+				-->
+			</div>
+		
+        </div>
+
+        <div class="modal" id="modal">
+
+			<div class="modal-background"></div>
+
+			<div class="modal-content">
+
+				<form method="POST" action="/addsheet">
+
+				    {{ form.hidden_tag() }}
+
+				    <div class="field">
+
+				        <div class="control">
+
+				            {{ form.sheet_name.label (class = 'title') }}<br>
+				            {{ form.sheet_name (class= "input is-large") }}
+
+				        </div>
+
+				    </div>
+
+				    <div class="field">
+
+				        <div class="control">
+
+				            {{ form.sheet_id.label (class = 'title') }}<br>
+				            {{ form.sheet_id (class= "input is-large", placeholder="copy url") }}
+
+				        </div>
+
+				    </div>
+
+				    <div class="field">
+
+				        <div class="control">
+
+				            {{ form.link_col.label (class = 'title')}}<br>
+				            {{ form.link_col (class= "input is-large") }}
+
+				        </div>
+
+				    </div>
+
+				    <div class="field">
+
+				        <div class="control">
+
+				            {{ form.title_col.label (class = 'title')}}<br>
+				            {{ form.title_col (class= "input is-large") }}
+
+				        </div>
+
+				    </div>
+
+				    <div class="field">
+
+				        <div class="control">
+
+				            {{ form.starting_row.label (class = 'title')}}<br>
+				            {{ form.starting_row (class= "input is-large") }}
+
+				        </div>
+
+				    </div>
+
+
+				    {{ form.submit (class= "button is-block is-info is-large is-fullwidth") }}
+					    
+				</form>
+
+			</div>
+
+			<button class="modal-close is-large" aria-label="close"></button>\
+
+		</div>
+		
+<!--
+		<div class="modal" id="modal2">
+
+			<div class="modal-background"></div>
+
+			<div class="modal-content">
+
+				<form method="POST" action="/startingrow">
+
+				    
+				    <div class="field">
+
+				        <div class="control">
+
+
+				        </div>
+
+				        
+
+				    
+				      
+
+				        
+				    </div>
+				    <a  id="assign">
+				    	
+					</a>
+					
+					onclick="document.getElementById('clear').value = ''"
+				
+				        
+				</form>
+			</div>
+
+			<button class="modal-close is-large" aria-label="close"></button>\
+
+		</div>
+	-->
+
+<script type="text/javascript">
+		
+	document.addEventListener('DOMContentLoaded', () => {
+  		(document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    		$notification = $delete.parentNode;
+
+    		$delete.addEventListener('click', () => {
+      			$notification.parentNode.removeChild($notification);
+    		});
+  		});
+	});
+
+</script>
+
+<script>
+         $(".modal-button").click(function() {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+         });
+         
+         $(".modal-close").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+
+         $(".modal-background").click(function() {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+         });
+</script>
+   
+{% endblock %}

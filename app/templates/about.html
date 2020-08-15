@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<div class="columns">
+
+	<div class="column is-three-fourths">
+
+		<div class="card center" style="width: 60%">
+
+			<div class="card-image">
+
+				<figure class="image is-1by1">
+					
+					<img src="{{ url_for ('static', filename= 'me.jpg') }}" alt="Placeholder image">
+				
+				</figure>
+
+			</div>
+
+			<div class="card-content">
+			
+				<div class="media">
+
+					<div class="media-content">
+
+						<p class="title is-3 has-text-black">
+
+							Matthew Tralka
+
+						</p>
+
+						<p class="subtitle is-5 has-text-black">
+
+							<a href="https:tralka.xyz" style='color: #3273dc'>tralka.xyz</a>
+
+						</p>
+
+					</div>
+
+				</div>
+
+				<div class="content">
+
+					Hi! My name is Matthew Tralka and I created ClassyFi. While not fiddling around with technology,
+					I am a full-time student at the University of Maryland, double majoring in GIS and Computer Cartography + Environmental
+					Science and Policy
+
+				</div>
+
+			</div>
+
+			<div class="card-footer">
+
+				<p class="card-footer-item">
+
+					contact me: mtralka [at] umd.edu
+
+				</p>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="column">
+
+			<div class="box">
+
+				<div class="content">
+
+					<h3 class="is-medium">
+
+						Why did you make ClassyFi?
+
+					</h3>
+
+					<p>
+
+						ClassyFi was a project of necessity! Research into open source social media big data led me to large datasets of photos that needed manual classification. There wasn’t a good option on the market that allowed for dynamic group photo classification. So, I studied up and got to work! Thus, ClassyFi was born. 
+
+					</p>
+
+				</div>
+
+			</div>
+
+			<div class="box">
+
+				<div class="content">
+
+					<h3 class="is-medium">
+
+						How did you make ClassyFi?
+
+					</h3>
+
+					<p>
+
+					<strong>Front end:</strong> HTML, CSS, BULMA, Jinja, JavaScript (some JQuery)
+					<br/><br/>
+					<strong>Back end:</strong> Flask, SQLite (SQLAlchemy), Gspread (Google Sheet API V4), deployed on a uWSGI server behind an Nginx reverse proxy. 
+
+					</p>
+
+				</div>
+
+			</div>
+
+			<div class="box">
+
+				<div class="content">
+
+					<h3 class="is-medium">
+
+						What are your goals for ClassyFi?
+
+					</h3>
+
+					<p>
+
+						Ultimately, I want to turn ClassyFi into an online
+						photo classification tool that <em>anyone</em> can use.
+						This means two main things:
+
+						<ol>
+
+							<li> 
+
+								Integrate dynamic front-end classification methodologies editable in real-time by users like you.
+
+							</li>
+
+							<li>
+
+								Leverage modern ML technologies to optimize and simplify manual classifications.
+
+							</li>
+
+						</ol>
+
+						As an active student, these goals might take some time! However, I remain dedicated and driven to make ClassyFi a prominent classification tool.
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+{% endblock %}
