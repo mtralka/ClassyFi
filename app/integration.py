@@ -9,8 +9,6 @@ import time
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
          "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
-schema = ['plant', 'water']
-
 COL_SCHEMA = (
         "reviewer", 'comments', "subject", 'lang', "plant_sub1", "plant_sub2",
         "plant_sub3",
@@ -22,7 +20,7 @@ global cred, client, sheet
 
 def activateConnection():
 	
-	
+	# depreciated OAuth
 	#creds = ServiceAccountCredentials.from_json_keyfile_name('CREDS.json', scope)
 	
 	creds = Credentials.from_service_account_file('CREDS.json', scopes=scope)
@@ -32,9 +30,9 @@ def activateConnection():
 	
 	return client
 	
-
 def connectToSheet(client):
 	
+	# depreciated auth by sheet name
 	# sheet = client.open(str(session['sheet_name'])).sheet1
 	# sheet = client.open(str(session['sheet_id'])).sheet1
 	sheet = client.open_by_url(session['sheet_id']).sheet1
@@ -44,7 +42,9 @@ def connectToSheet(client):
 	return sheet
 
 def getNextInfo():
+
 	start_time = time.time()
+
 	# Recreate pickle ID from session
 	link_pickle = session['link_pickle'] 
 	title_pickle = session['title_pickle']
@@ -410,114 +410,3 @@ def interpret(results):
 
 	write_reviewer()
 	
-
-
-
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-	"""
-	if "people" in results:
-		print("people alert")
-
-		if 'selfie':
-			if results['selfie'] == 'Yes':
-				print("Confirmed Yes")
-			elif results['selfie'] == 'IDK':
-				print("Confirmed IDK")
-			elif results['selfie'] == 'No':
-				print("Confirmed No")
-			else:
-				pass
-
-	if "water" in results:
-
-		print("We have watta")
-
-		if 'water_lake' in results:
-
-			print("Lake Pond")
-
-		if 'water_waterfall' in results:
-
-			print("Waterfall")
-			
-		if 'water_coastal' in results:
-			
-			print("Coastal Water")
-
-		if 'water_stream' in results:
-
-			print("Stream River")
-
-		if len(str(results['water_other'])) > 0:
-			
-			print(str(results['water_other']))
-
-		# Add to Sheet "Water Type"
-		# Add to subject list
-
-
-	if 'pet' in results:
-			print("Pet Alert")
-"""
-"""
-	for i in xlist:
-		if str(i) in results:
-			#
-			# Add to list of subject
-			#
-
-		else:
-			# Do nothign
-
-	for i in resultsL
-		if str(i) in subject_list:
-			#
-			# Add to Affimr Subject list
-			#
-		elif str(i) in lang_list
-			#
-			# Add to Affirm subject list
-			#
-
-	# Update Worksheet SUBJECT cell with all of subject list
-	# Update worksheet LANG cell with all of list
-"""
-
-# Define as List
-""""
-	people = BooleanField(label='People')
-	pet = BooleanField(label='Pet')
-	livestock = BooleanField(label='Livestock')
-	wildlife = BooleanField(label='Wildlife')
-	plant = BooleanField(label='Plant')
-	landscape = BooleanField(label='Landscape')
-	water = BooleanField(label='Water Feature')
-	recreational = BooleanField(label='Recreational')
-	building = BooleanField(label='Building')
-	infastructure = BooleanField(label='Infastructure')
-	cultural = BooleanField(label='Cultural Aspect')
-	agriculture = BooleanField(label='Agriculture')
-
-	english = BooleanField(label='English')
-	italian = BooleanField(label='Italian')
-	german = BooleanField(label='German')
-	french = BooleanField(label='French')
-	icelandic = BooleanField(label='Icelandic')
-	no_lang = BooleanField(label='None')
-	idk_lang = BooleanField(label='IDK')
-	other_lang = TextField(label='Other: ')
-"""
-

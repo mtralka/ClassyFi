@@ -5,10 +5,7 @@ from wtforms.form import BaseForm, Form
 from wtforms import validators, ValidationError, widgets
 
 
-WTF_CSRF_SECRET_KEY = 'a random string'
-
-
-
+WTF_CSRF_SECRET_KEY = '###############'
 
 class LoginForm(FlaskForm):
 	
@@ -33,35 +30,6 @@ class SheetInfo(FlaskForm):
 	title_col = IntegerField("Title Column", validators=[InputRequired(message = "Please enter title column")])
 	sheet_id = TextField("Sheet Link", validators=[InputRequired(message = "Please enter sheet link")])
 	submit = SubmitField("Submit Sheet Info")
-
-	
-#class ClassificationSubject(FlaskForm):
-	#people = BooleanField(label='People')
-	#pet = BooleanField(label='Pet')
-	#livestock = BooleanField(label='Livestock')
-	#wildlife = BooleanField(label='Wildlife')
-	#plant = BooleanField(label='Plant')
-	#landscape = BooleanField(label='Landscape')
-	#water = BooleanField(label='Water Feature')
-	#recreational = BooleanField(label='Recreational')
-	#building = BooleanField(label='Building')
-	#nfastructure = BooleanField(label='Infastructure')
-	#cultural = BooleanField(label='Cultural Aspect')
-	#agriculture = BooleanField(label='Agriculture')
-
-	
-#class ClassificationLanguage(FlaskForm):
-	#english = BooleanField(label='English')
-	#italian = BooleanField(label='Italian')
-	#german = BooleanField(label='German')
-	#french = BooleanField(label='French')
-	#icelandic = BooleanField(label='Icelandic')
-	#no_lang = BooleanField(label='None')
-	#idk_lang = BooleanField(label='IDK')
-	#other_lang = TextField(label='Other')
-
-
-
 
 class Classification(FlaskForm):
 
@@ -109,7 +77,7 @@ class Classification(FlaskForm):
 	water_coastal = BooleanField(label='Coastal')
 	water_other_bool = BooleanField(label='Other')
 	water_other = TextField(label='Other')
-	# water_multiple = SelectMultipleField('Test',choices=[('stream', 'stream'), ('river','river'), ('pond','pond')])
+
 	water_response = HiddenField(label='water_response')
 
 	weather = BooleanField(label="Weather")
@@ -134,21 +102,13 @@ class Classification(FlaskForm):
 
 	go_to_row = IntegerField("Target row")
 
-
+# Testing
+"""
 class ThisForm():
-
-
 
 	def add_bool(name, label):
 		setattr(ThisForm, name, BooleanField(label=label))
-
-
-
 	pass
-
-
-
-
 
 def test():
 
@@ -163,17 +123,11 @@ def test():
 
 	return form_from_fields([(field, BooleanField(field)) for field in fields])
 
-
-
 class MainFormOne(FlaskForm):
 
-	
-
-
-	
 	#list_checkbox = FormField(form_from_fields([(field, BooleanField(field)) for field in fields]))
 	list_checkbox = FormField(test())
-	
+"""
 
 
 

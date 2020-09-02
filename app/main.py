@@ -8,8 +8,8 @@ from .model import Sheet, User
 
 main = Blueprint('main', __name__)
 
-main.secret_key = 'randomstring'
-WTF_CSRF_SECRET_KEY = 'a random string'
+main.secret_key = '#############'
+WTF_CSRF_SECRET_KEY = '###############'
 
 
 @main.route('/')
@@ -42,13 +42,12 @@ def deleteSheet(ids):
 
 	if current_user.id == request_sheet.user_id:
 
-		
-
 		Sheet.query.filter_by(id=ids).delete()
 
 		db.session.commit()
 
 		return redirect(url_for('main.landing'))
+
 	else:
 
 		return redirect(url_for ('main.landing'))
@@ -67,9 +66,9 @@ def newSheet():
 		if form.validate() == False:
 
 			flash('All fields are required.')
-			# return render_template('newSheet.html', form = form, alright= False, alright_message = '')
+			
 			return render_template('landing.html', form=form, name=current_user.name.title(), sheets=sheets, alright = False, alright_message='')
-			#return 'error'
+			
 		name = str(request.form.get('sheet_name'))
 		link_col = int(request.form.get('link_col'))
 		title_col = int(request.form.get('title_col'))
@@ -84,13 +83,13 @@ def newSheet():
 
 		print(current_user.sheets)
 
-		#return render_template('newSheet.html', form = form, alright= True, alright_message = 'Form Saved')
+		
 		return render_template('landing.html', form = form, alright= True, alright_message = 'Form Saved', 
 		name=current_user.name.title(), sheets=Sheet.query.filter_by(user_id = current_user.id).all())
 
 	return render_template('landing.html', form = form, alright= False, alright_message = '', 
 		name=current_user.name.title(), sheets=Sheet.query.filter_by(user_id = current_user.id).all())
-	#return redirect(url_for('main.landing'))
+	
 
 # Pull vars from selected sheet object. Set to session
 @main.route('/classify/<ids>')
@@ -119,7 +118,7 @@ def getClassifySheet(ids):
 		session['sheet_id'] = str(target.sheet_id)
 		session['link_column'] = int(target.sheet_link_col)
 		session['title_column'] = int(target.sheet_title_col)
-		# -1 adjust for zero count
+		
 		session['starting_row'] = int(target.starting_row)
 		session['current_row'] = session['starting_row']
 		session['reviewer'] = get_name()
@@ -191,13 +190,13 @@ def classify():
 		link = new_link, form = form, row = session['current_row'])
 
 
-
-
+# Testing
+"""
 @main.route('/template', methods=['GET', 'POST'])
 @login_required
 def template():
 
-	#list_name = ('Test_labe', 'another', 'and_another', 'one_more')
+	#list_name = ('Test1', 'Test2', 'Test3')
 	#list_apply = list()
 	#name = list()
 
@@ -233,6 +232,6 @@ def template():
 	#print(form)
 
 	return render_template('test-add.html', form=form)
-
+"""
 
 
