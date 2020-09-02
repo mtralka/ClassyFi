@@ -9,12 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ url_for ('static', filename= 'style.css') }}" />
+
+    <!--
     <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
-    
+    -->
+
+    <script type="text/javascript">
+
+        function flickr(){
+        
+        window.open( "{{link}}" ,"flickr" , "height=900,width=900,location=0,resizable=1");
+        
+    }
+
+    </script>
     
 </head>
 
-<body>
+<body onload="flickr()">
+
     <section class="hero is-primary is-fullheight">
 
         <div class="hero-head">
@@ -98,16 +111,46 @@
 
         <form method="POST">        
         
-        <div class="hero-body">
+            <div class="hero-body">
 
-            <div class="tile is-ancestor">
+                <div class='container flex-container-classify'>
+                    
+                    <div class = "flex-child-classify-buttons">
 
-                <!-- Horizontal 1 -->
-                <div class="tile is-2">
+                        <div class='classify-buttons'>
 
-                    <div class="tile is-parent">
+                            {{ form.Previous (class= "button is-danger is-medium") }}
 
-                        <div class="panel tile is-child">
+                        </div>
+                    
+
+                       
+                        <div class='classify-buttons'>
+
+                            <a data-target="#modal" class="modal-button">
+
+                                <button type='button' class="button is-link is-medium modal-button">
+
+                                    Current Row: {{ row }} (click to change) 
+
+                                </button>
+
+                            </a>
+                            
+                        </div>
+                        
+                        <div class='classify-buttons'>
+
+                             {{ form.Next (class= "button is-success is-medium") }}
+                            
+                        </div>
+                        
+
+                    </div>
+                    
+                    <div class='flex-child-classify'>
+
+                        <div class="panel">
 
                             <p class="panel-heading">
 
@@ -212,56 +255,131 @@
 
                     </div>
 
-                </div>
+                    <div class='flex-child-classify' id="horizontal_2">
+                    
+                        <div class="panel">
 
-                <!-- Sub Question Prompt-->
+                                <p class="panel-heading">
 
-                    <!-- Cultural Sub -->
-                    <div class="title is-2" id="cultural_sub1" style="display: none">
+                                    Language
 
-                        <div class="tile is-parent is-vertical">
+                                </p>
 
-                            <div class="tile is-child ">
+                                <label class="panel-block">
 
-                                <div class="panel">
-
-                                    <p class="panel-heading">
-
-                                        What type of cultural aspect?
-
-                                    </p>
-
-                                    <label class="panel-block">
-
-                                        {{ form.cultural_sub1 (class="input is-info is-small")}}
-                                        
-                                    </label>
-
-                                    <label class="panel-block">
-
-                                        <button type="button" class="button is-success is-small" onclick="done_sub('cultural_sub1')">
-
-                                            Done 
-
-                                        </button>
-
-                                    </label>
+                                    {{ form.english }} <br/>
+                                    {{ form.english.label }}
                                     
-                                </div>
+                                </label>
 
+                                <label class="panel-block">
+
+                                    {{ form.italian }} <br/>
+                                    {{ form.italian.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.german }} <br/>
+                                    {{ form.german.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.french }} <br/>
+                                    {{ form.french.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.icelandic }} <br/>
+                                    {{ form.icelandic.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.no_lang }} <br/>
+                                    {{ form.no_lang.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.idk_lang }} <br/>
+                                    {{ form.idk_lang.label }}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    {{ form.other_lang_bool }}
+                                    {{ form.other_lang (class="input is-info is-small", placeholder="Other", style="overflow-x:hidden")}}
+                                    
+                                </label>                                
+
+                            </div>
+
+                            <div class="panel">
+
+                                <p class="panel-heading">
+
+                                    {{ form.comment.label }}
+
+                                </p>
+
+
+                                <label class="panel-block">
+
+                                    {{ form.comment (class="textarea is-info",style="width:100%",rows="3") }} <br/>
+                                    
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+                        <!-- Sub Question Prompt-->
+
+                        <!-- Cultural Sub -->
+                        <div class="title flex-child-classify" id="cultural_sub1" style="display: none">
+
+                            <div class="panel">
+
+                                <p class="panel-heading">
+
+                                    What type of cultural aspect?
+
+                                </p>
+
+                                <label class="panel-block">
+
+                                    {{ form.cultural_sub1 (class="input is-info is-small")}}
+                                    
+                                </label>
+
+                                <label class="panel-block">
+
+                                    <button type="button" class="button is-success is-small" onclick="done_sub('cultural_sub1')">
+
+                                        Done 
+
+                                    </button>
+
+                                </label>
+                                
                             </div>
 
                         </div>
 
-                    </div>
+                        <!-- Landscape Sub 1 -->
+                        <div class="title flex-child-classify" id="landscape_sub1" style="display: none">
 
-                    <!-- Landscape Sub 1 -->
-                    <div class="title is-2" id="landscape_sub1" style="display: none">
-
-                        <div class="tile is-parent is-vertical">
-
-                            <div class="tile is-child ">
-
+                            <div>
                                 <div class="panel">
 
                                     <p class="panel-heading">
@@ -298,7 +416,7 @@
                                         
                                     
                                     </label>
-  
+
                                 </div>
 
                                 <div class="panel" id="landscape_sub2">
@@ -352,14 +470,10 @@
 
                         </div>
 
-                    </div>
+                        <!-- Plant Sub -->
+                        <div class="title flex-child-classify" id="plant_sub1" style="display: none; overflow-y: auto; max-height: 35rem; ">
 
-                    <!-- Plant Sub -->
-                    <div class="title is-2" id="plant_sub1" style="display: none; overflow-y: auto; max-height: 35rem; ">
-
-                        <div class="tile is-parent is-vertical">
-
-                            <div class="tile is-child ">
+                            <div>
 
                                 <!-- PLANT SUB 1 TECH -->
                                 <div class="panel">
@@ -413,7 +527,7 @@
 
                                         <div class="buttons has-addons">
 
-                                            <button type='button' class="button is-danger is-small " onclick="addField('plant_sub2_answer', 'No'), , toggle_display_p('plant_sub4')">
+                                            <button type='button' class="button is-danger is-small " onclick="addField('plant_sub2_answer', 'No'), toggle_display_p('plant_sub4')">
 
                                                 No
 
@@ -451,14 +565,14 @@
                                     <label class="panel-block">
 
                                         {{ form.plant_sub3_answer (class="text is-medium")}}
+
+                                        <button type="button" class="button is-link is-small" onclick="toggle_display_p('plant_sub4')" style="margin-left: 5px">
+
+                                            Submit 
+
+                                        </button>
                                         
                                     </label>
-
-                                    <button type="button" class="button is-link is-small" onclick="toggle_display_p('plant_sub4')">
-
-                                        Done 
-
-                                    </button>
 
                                 </div>
 
@@ -513,14 +627,14 @@
                                     <label class="panel-block">
 
                                         {{ form.plant_sub5_answer (class="text is-medium")}}
+
+                                        <button type="button" class="button is-link is-small" onclick="toggle_display_p('plant_sub6')" style="margin-left: 5px">
+
+                                            Submit 
+
+                                        </button>
                                         
                                     </label>
-
-                                    <button type="button" class="button is-link is-small" onclick="toggle_display_p('plant_sub6')">
-
-                                        Done 
-
-                                    </button>
 
                                 </div>
 
@@ -665,18 +779,13 @@
                                 </div>
 
                             </div>
-
+                                
                         </div>
 
-                    </div>
+                        <!-- People Sub -->
+                        <div class="title flex-child-classify" id="people_sub1" style="display: none">
 
-                    <!-- People Sub -->
-                    <div class="title is-2" id="people_sub1" style="display: none">
-
-                        <div class="tile is-parent is-vertical">
-
-                            <div class="tile is-child ">
-
+                            <div>
                                 <div class="panel">
 
                                     <p class="panel-heading">
@@ -717,14 +826,10 @@
 
                         </div>
 
-                    </div>
+                        <!-- Water Sub 1 -->
+                        <div class="title flex-child-classify" id="water_sub1" style="display: none">
 
-                    <!-- Water Sub 1 -->
-                    <div class="title is-2" id="water_sub1" style="display: none">
-
-                        <div class="tile is-parent is-vertical">
-
-                            <div class="tile is-child ">
+                            <div>
 
                                 <div class="panel">
 
@@ -789,14 +894,10 @@
 
                         </div>
 
-                    </div>
+                        <!-- Weather Sub 1 -->
+                        <div class="title flex-child-classify" id="weather_sub1" style="display: none">
 
-                    <!-- Weather Sub 1 -->
-                    <div class="title is-2" id="weather_sub1" style="display: none">
-
-                        <div class="tile is-parent is-vertical">
-
-                            <div class="tile is-child ">
+                            <div>
 
                                 <div class="panel">
 
@@ -834,215 +935,79 @@
 
                         </div>
 
-                    </div>
+                        <div class = "flex-child-classify-buttons" style="margin-top: 20px;">
 
-                <!-- Horizontal 2 -->
-                <div class="tile is-2" id="horizontal_2">
+                            <div class='classify-buttons'>
 
-                    <div class="tile is-parent is-vertical">
-
-                        <div class="tile is-child ">
-
-                            <!-- Horizontal 2, vertical 1 -->
-                            <!-- LANGUAGE -->
-                            <div class="panel">
-
-                                <p class="panel-heading">
-
-                                    Language
-
-                                </p>
-
-                                <label class="panel-block">
-
-                                    {{ form.english }} <br/>
-                                    {{ form.english.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.italian }} <br/>
-                                    {{ form.italian.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.german }} <br/>
-                                    {{ form.german.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.french }} <br/>
-                                    {{ form.french.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.icelandic }} <br/>
-                                    {{ form.icelandic.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.no_lang }} <br/>
-                                    {{ form.no_lang.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.idk_lang }} <br/>
-                                    {{ form.idk_lang.label }}
-                                    
-                                </label>
-
-                                <label class="panel-block">
-
-                                    {{ form.other_lang_bool }}
-                                    {{ form.other_lang (class="input is-info is-small", placeholder="Other")}}
-                                    
-                                </label>                                
+                                {{ form.Previous (class= "button is-danger is-medium") }}
 
                             </div>
+                    
 
-                        </div>
+                            <div class='classify-buttons'>
 
-                        <!-- Horizontal 2, vertical 2 -->
-                        <!-- COMMENTS -->
-                        <div class="tile is-child">
+                                <a data-target="#modal" class="modal-button">
 
-                            <div class="panel">
+                                    <button type='button' class="button is-link is-medium modal-button">
 
-                                <p class="panel-heading">
+                                        Current Row: {{ row }} (click to change) 
 
-                                    {{ form.comment.label }}
+                                    </button>
 
-                                </p>
-
-
-                                <label class="panel-block">
-
-                                    {{ form.comment (class="textarea is-info",style="width:100%",rows="2") }} <br/>
-                                    
-                                </label>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Horizontal 3 -->
-                <!-- FLICKR FRAME -->
-                <div class="tile">
-
-                    <div class="tile is-parent is-vertical">
-
-                        <!-- Horizontal 3, FLICKR BOX, middle-->
-                        <div class="tile is-child ">
-
-                            <iframe is="x-frame-bypass" src= "{{ link }} " width="100%" height="600px"></iframe>
-
-                        </div>
-
-                        <!-- Horizontal 3, bottom -->
-                        <div class="tile is-child ">
-
-                            <div class = "level">
-
-                                <div class = 'level-left'>
-
-                                    {{ form.Previous (class= "button is-danger is-medium") }}
-
-                                </div>
-
-                                <!-- THIS NEEDS HELP -->
-                                <div class="level-item">
-
-                                    <a data-target="#modal" class="modal-button">
-
-                                        <button type='button' class="button is-link is-medium modal-button">
-
-                                            Current Row: {{ row }} (click to change) 
-
-                                        </button>
-
-                                    </a>
-
-                                    <!--
-                                    <a data-target="#modal" class="modal-button">
-                                        <button class="is-medium is-link button " >
-                                    
-                                            Current Row: {{ row + 1 }} (click to change) 
-                                    
-                                        </button>
-
-                                    </a>
-                                -->
-
-                                </div>
+                                </a>
                                 
-                                <div class = 'level-right'>
-
-                                     {{ form.Next (class= "button is-success is-medium") }}
-                                    
-                                </div>
-
                             </div>
-                           
+                            
+                            <div class='classify-buttons'>
+
+                                 {{ form.Next (class= "button is-success is-medium") }}
+                                
+                            </div>
+                        
                         </div>
 
                     </div>
-
+                   
                 </div>
-       
-            </div>
 
         </div>
 
-        <div class="modal" id="modal">
+    </div>
 
-            <div class="modal-background"></div>
+    <div class="modal" id="modal">
 
-            <div class="modal-content">
+        <div class="modal-background"></div>
 
-                <div class="field">
+        <div class="modal-content">
 
-                    <div class="control">
+            <div class="field">
 
-                        {{ form.go_to_row.label (class='subtitle')}}
+                <div class="control">
 
-                        {{ form.go_to_row (class='input is-info is-medium') }}
+                    {{ form.go_to_row.label (class='subtitle')}}
 
-                    </div>
+                    {{ form.go_to_row (class='input is-info is-medium') }}
 
                 </div>
 
-                <button class='button is-medium is-link'>
-
-                    Go
-
-                </button>
-      
             </div>
 
-            <button type='button' class="modal-close is-large" aria-label="close"></button>\
+            <button class='button is-medium is-link'>
 
+                Go
+
+            </button>
+  
         </div>
 
-    </form>
+        <button type='button' class="modal-close is-large" aria-label="close"></button>\
+
+    </div>
+
+</form>
     
         
-
-    </section>
+</section>
 
     
 </body>
@@ -1073,7 +1038,7 @@
         else {
 
             e.style.display = 'none';
-            j.style.display = 'flex';
+            j.style.display = 'initial';
 
         }
             
@@ -1120,7 +1085,7 @@
         var e = document.getElementById(id);
         var b = document.getElementById('horizontal_2');
         e.style.display = 'none';
-        b.style.display = 'flex';
+        b.style.display = 'initial';
         
 
         }
@@ -1165,11 +1130,41 @@
 
     function addField(field, string) {
         var addField = document.getElementById(field);
-        addField.value += string;
+        addField.value = string;
 
 
     }
 
 </script>
+
+<script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+            $navbarBurgers.forEach( el => {
+            el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+
+        });
+
+    </script>
 
 </html>

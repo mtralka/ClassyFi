@@ -251,3 +251,35 @@
   flex-basis: 100%;
   height: 0;
 }
+
+
+.flex-container-classify {
+
+	display: flex;
+	max-width: 50rem;
+	flex-wrap: wrap;
+
+}
+
+.flex-child-classify {
+
+	flex: 1;
+	margin: 0 1%;
+
+
+}
+
+
+.flex-child-classify-buttons {
+
+	width: 100%;
+	display: inherit;
+	margin-bottom: 20px;
+}
+
+
+.classify-buttons {
+
+	margin: 0 auto;
+
+}

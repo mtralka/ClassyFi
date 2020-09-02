@@ -22,8 +22,10 @@ global cred, client, sheet
 
 def activateConnection():
 	
-	# creds = ServiceAccountCredentials.from_json_keyfile_name('/home/matt/onlineClas/project/CREDS.json', scope)
-	creds = Credentials.from_service_account_file('/home/matt/onlineClas/project/CREDS.json', scopes=scope)
+	
+	#creds = ServiceAccountCredentials.from_json_keyfile_name('CREDS.json', scope)
+	
+	creds = Credentials.from_service_account_file('CREDS.json', scopes=scope)
 	client = gspread.authorize(creds)
 
 	print('Auth Done')
@@ -66,18 +68,18 @@ def getNextInfo():
 def deletePickle():
 
 	# Recreate pickle ID from session
+	
 	link_pickle = session['link_pickle'] 
 	title_pickle = session['title_pickle']
+	
 
 	if os.path.exists(link_pickle):
 		os.remove(link_pickle)
-	else:
-		print("No Pickle Link")
+	
 
 	if os.path.exists(title_pickle):
-			os.remove(title_pickle)
-	else:
-		print("No Pickle Title")
+		os.remove(title_pickle)
+	
 
 def getColData(ids, sheet):
 
@@ -224,14 +226,22 @@ def interpret(results):
 
 	def write_plant():
 
-	# TODO TODO TODO 
+		PLANT_SUB = ("plant_sub1", "plant_sub2","plant_sub3",
+        "plant_sub4", "plant_sub5", "plant_sub6", "plant_sub7", "plant_sub8")
 
+		for sub in PLANT_SUB:
 
+			if reviewed:
+				message = get_existing(sub)
+				message += ' | '
+			else:
+				message = ''
 
+			results_key = str(sub) + '_answer'
 
+			message += results[results_key]
 
-		pass
-
+			sheet.update_cell(session['current_row'] , int(COL_SCHEMA.index(sub) + int(session['link_column']) + 1) , message)
 
 	def write_people():
 

@@ -39,13 +39,13 @@
 
 				{% with messages = get_flashed_messages() %}
 				{% if messages %}
-				<div class="notification is-danger">
+				<div class="notification is-danger" id="flashed">
 
 					<button class="delete"></button>
 
 					<div class="content">
 
-						{{ message }}
+						{{ messages }}
 
 					</div>
 				
@@ -54,7 +54,7 @@
 				{% endwith %}
 
 				{% for message in form.sheet_name.errors %}
-				<div class="notification is-danger">
+				<div class="notification is-danger" id="name-error">
 
 					<button class="delete"></button>
 
@@ -68,7 +68,7 @@
 				{% endfor %}
 
 				{% for message in form.link_col.errors %}
-				<div class="notification is-danger">
+				<div class="notification is-danger"id="link-col">
 
 					<button class="delete"></button>
 
@@ -82,7 +82,7 @@
 				{% endfor %}
 
 				{% for message in form.title_col.errors %}
-				<div class="notification is-danger">
+				<div class="notification is-danger" id="tile-col">
 
 					<button class="delete"></button>
 

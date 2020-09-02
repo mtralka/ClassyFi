@@ -72,6 +72,9 @@ def signup():
 
 @auth.route('/logout')
 def logout():
-	integration.deletePickle()
+	
+	if session.get('link_pickle') is not None:
+		integration.deletePickle()
 	logout_user()
+	session.clear()
 	return redirect(url_for('main.index'))

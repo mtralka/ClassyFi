@@ -130,7 +130,6 @@ def getClassifySheet(ids):
 			client = integration.activateConnection()
 
 		except:
-
 			flash('Invalid Auth Credentials')
 			return redirect(url_for('main.landing'))
 
@@ -152,7 +151,7 @@ def getClassifySheet(ids):
 		return redirect(url_for("main.classify"))
 
 	else:
-
+		flash('You are not authorized')
 		return redirect(url_for ('main.landing'))
 
 
